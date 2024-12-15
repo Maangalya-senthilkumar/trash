@@ -11,7 +11,7 @@ document.getElementById("trashForm").addEventListener("submit", function (e) {
     }
 
     // Redirect to Gradio URL
-    window.open("https://47d44345255f965632.gradio.live/");
+    window.open("https://f47a973637010027e2.gradio.live/");
     
     // Simulate earning credits
     showPopup();
