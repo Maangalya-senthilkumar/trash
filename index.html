@@ -1,68 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trash Tracker Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trash Classifier</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <h1>Trash Tracker</h1>
-            <ul>
-                <li><a href="#dashboard">Dashboard</a></li>
-                <li><a href="#predict">Predict Trash</a></li>
-                <li><a href="#locator">Dustbin Locator</a></li>
-            </ul>
-        </nav>
+  <div class="container">
+    <h1>Trash Classifier Dashboard</h1>
 
-        <!-- Dashboard Section -->
-        <section id="dashboard">
-            <h2>Welcome, User!</h2>
-            <div class="stats">
-                <div class="credits">
-                    <h3>Credits Earned:</h3>
-                    <p id="userCredits">0</p>
-                </div>
-                <div class="hotels">
-                    <h3>Registered Hotels:</h3>
-                    <p>5 Hotels</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trash Prediction Section -->
-        <section id="predict">
-            <h2>Predict Trash</h2>
-            <form id="trashForm">
-                <label for="trashImage">Upload an image of trash:</label>
-                <input type="file" id="trashImage" accept="image/*">
-                <button type="submit">Analyze Trash</button>
-            </form>
-            <div id="trashResult" class="result"></div>
-        </section>
-
-        <!-- Dustbin Locator Section -->
-        <section id="locator">
-            <h2>Dustbin Locator</h2>
-            <form id="locationForm">
-                <label for="userLocation">Enter your location:</label>
-                <input type="text" id="userLocation" placeholder="Enter city or area">
-                <button type="submit">Check Dustbins</button>
-            </form>
-            <div id="locationResult" class="result"></div>
-        </section>
+    <!-- Upload Form -->
+    <div class="upload-section">
+      <label for="imageUpload" class="upload-label">Upload an Image of Trash</label>
+      <input type="file" id="imageUpload" accept="image/*">
+      <button id="uploadButton">Classify Trash</button>
     </div>
 
-    <!-- Pop-up Animation -->
-<div id="popup" class="popup hidden">
-    <p>🎉 You earned 10 credits! 🎉</p>
-    <button id="closePopup">Close</button>
-</div>
+    <!-- Result Display -->
+    <div id="resultSection" class="hidden">
+      <h2>Prediction Result:</h2>
+      <p id="resultText"></p>
+      <div id="creditsPopup" class="popup hidden">
+        🎉 You earned <span id="credits">10</span> credits! 🎉
+      </div>
+    </div>
 
+    <!-- Location Section -->
+    <div class="location-section">
+      <h2>Find Nearby Dustbins</h2>
+      <label for="locationInput">Enter Your Location:</label>
+      <input type="text" id="locationInput" placeholder="City or Area">
+      <button id="checkDustbin">Check Dustbins</button>
+      <p id="locationResult"></p>
+    </div>
+  </div>
 
-    <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
-</ht
+</html>
+
