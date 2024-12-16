@@ -1,53 +1,57 @@
-// JavaScript for Trash Tracker
+document.getElementById("uploadButton").addEventListener("click", async () => {
+  const fileInput = document.getElementById("imageUpload");
+  const resultSection = document.getElementById("resultSection");
+  const resultText = document.getElementById("resultText");
+  const popup = document.getElementById("creditsPopup");
 
-// Handle Trash Prediction
-document.getElementById("trashForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const trashImage = document.getElementById("trashImage").files[0];
+  if (fileInput.files.length === 0) {
+    alert("Please upload an image!");
+    return;
+  }
 
-    if (!trashImage) {
-        alert("Please upload an image!");
-        return;
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append("data", file);
+
+  try {
+    const response = await fetch("YOUR_GRADIO_LINK_HERE", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Prediction failed!");
     }
 
-    // Redirect to Gradio URL
-    window.open("https://04e4387a9bba85b011.gradio.live/");
-    
-    // Simulate earning credits
-    showPopup();
-    updateCredits(10);
-});
+    const prediction = await response.text(); // Assuming Gradio returns plain text
+    resultText.textContent = prediction;
 
-// Handle Dustbin Locator
-document.getElementById("locationForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    const location = document.getElementById("userLocation").value;
+    // Show result section
+    resultSection.classList.remove("hidden");
 
-    if (!location) {
-        document.getElementById("locationResult").textContent = "Please enter a valid location!";
-        return;
+    // Show credits popup if prediction is "water_bottle"
+    if (prediction === "water_bottle") {
+      popup.classList.remove("hidden");
     }
-
-    // Simulate dustbin location
-    const result = Dustbins found near ${location}: 3 available.;
-    document.getElementById("locationResult").textContent = result;
+  } catch (error) {
+    console.error(error);
+    alert("Something went wrong while predicting.");
+  }
 });
 
-// Update Credits
-let userCredits = 0;
+document.getElementById("checkDustbin").addEventListener("click", () => {
+  const locationInput = document.getElementById("locationInput").value.trim();
+  const locationResult = document.getElementById("locationResult");
 
-function updateCredits(points) {
-    userCredits += points;
-    document.getElementById("userCredits").textContent = userCredits;
-}
+  if (!locationInput) {
+    locationResult.textContent = "Please enter your location!";
+    return;
+  }
 
-// Show Pop-up
-function showPopup() {
-    const popup = document.getElementById("popup");
-    popup.classList.remove("hidden");
-    popup.style.display = "block";
-
-    setTimeout(() => {
-        popup.style.display = "none";
-    }, 2000);
-}
+  // Mock response for now
+  if (locationInput.toLowerCase().includes("city")) {
+    locationResult.textContent = "Dustbins found in your area.";
+  } else {
+    locationResult.textContent = "No dustbins found nearby.";
+  }
+});
