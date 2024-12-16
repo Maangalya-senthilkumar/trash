@@ -5,7 +5,10 @@ document.getElementById("trashForm").addEventListener("submit", function (e) {
     e.preventDefault();
     const trashImage = document.getElementById("trashImage").files[0];
 
-    
+    if (!trashImage) {
+        alert("Please upload an image!");
+        return;
+    }
 
     // Redirect to Gradio URL
     window.open("https://67f8b2dcae8b1b4634.gradio.live");
@@ -26,7 +29,7 @@ document.getElementById("locationForm").addEventListener("submit", function (e) 
     }
 
     // Simulate dustbin location
-    const result = `Dustbins found near ${location}: 3 available.`;
+    const result = Dustbins found near ${location}: 3 available.;
     document.getElementById("locationResult").textContent = result;
 });
 
