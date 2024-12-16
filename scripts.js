@@ -14,7 +14,7 @@ document.getElementById("uploadButton").addEventListener("click", async () => {
   formData.append("data", file);
 
   try {
-    const response = await fetch("YOUR_GRADIO_LINK_HERE", {
+    const response = await fetch("https://424df0bbb38feef00b.gradio.live", {
       method: "POST",
       body: formData,
     });
